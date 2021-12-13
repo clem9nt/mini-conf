@@ -3,6 +3,10 @@
 set nocompatible
 filetype plugin indent on           "   filetype, plugin, indent auto-detect
 set bg=dark
+syntax on
+set bg=dark
+color pablo
+hi Visual ctermfg=black ctermfg=grey
 
 "   ERGONOMIC
 set ignorecase smartcase            "   ignore case except if uppercase used
@@ -13,8 +17,8 @@ set showcmd                         "   cursor pos%[y:x] in statusline
 set shortmess-=S                    "   displays [x/y] for search pattern occurences
 set wildmenu                        "   displays possible completion matches
 set spelllang=en,fr                 "   spell lang suggestions
-if empty(glob($DOTVIM . "/.spell"))
-    exec 'silent !mkdir $DOTVIM/.spell'
+if empty(glob($DOTVIM . "/spell"))
+    exec 'silent !mkdir $DOTVIM/spell'
 endif
 set spellfile=$DOTVIM/.spell/custom.utf-8.add
 
@@ -59,10 +63,24 @@ nn xxv :e ~/.vimrc<CR>gi<Esc>
 nn xxz :e ~/.zshrc<CR>gi<Esc>
 nn xxt :e ~/.tmux.conf<CR>gi<Esc>
 
+"   CURSORCOLUMN
+nn glcc :set cursorcolumn!<CR>
+"   LCD
 nn glcd :cd %:h<CR>
+"   CURSORLINE
+nn glcl :set cursorline!<CR>
+"   HLSEARCH
 nn glhl :set hlsearch!<CR>
+"   LIST
 nn glli :set list!<CR>
+"   SOURCE VIMRC
 nn glso :silent write\|source $MYVIMRC\|e<CR>zR
+"   SPELL
+nn glsp :set spell!<CR>
+"   VIRTUAL EDIT
+nn glve :if &virtualedit == "" <BAR> set virtualedit=all <BAR>
+"   RESOLVE SYMLINK
+nn <silent> glsl :exec 'file ' . fnameescape(resolve(expand('%:p')))<CR>:lc %:h<CR>
 
 no ; :
 no : ;
