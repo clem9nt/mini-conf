@@ -59,6 +59,7 @@ nn xxv :e ~/.vimrc<CR>gi<Esc>
 nn xxz :e ~/.zshrc<CR>gi<Esc>
 nn xxt :e ~/.tmux.conf<CR>gi<Esc>
 
+nn glcd :cd %:h<CR>
 nn glhl :set hlsearch!<CR>
 nn glli :set list!<CR>
 nn glso :silent write\|source $MYVIMRC\|e<CR>zR
