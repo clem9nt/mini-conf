@@ -28,10 +28,12 @@ setopt hist_ignore_space
 #   aliases
 if [[ "$OSTYPE" == "darwin"* ]]; then       # enable ls colors
     alias ls="ls -G"
-    alias la="ls -G -lah"
+    alias la="ls -G -la"
+    alias latr="ls -G -latr"
 elif [[ "$OSTYPE" == "linux"* ]]; then
     alias ls="ls --color=auto"
-    alias la="ls --color=auto -lah"
+    alias la="ls --color=auto -la"
+    alias latr="ls --color=auto -latr"
     if type setxkbmap &> /dev/null; then    # swap Ctrl and Capslock
         setxkbmap -option 'ctrl:swapcaps'
     fi
