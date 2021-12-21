@@ -38,15 +38,15 @@ set belloff=all                     "   no more ring the bell
 set history=9999                    "   extends cmdline history
 set nomodeline secure               "   disables shell access / modelines
 if empty(glob($DOTVIM . "/.backup"))
-    exec 'silent !mkdir $DOTVIM/.backup'
+    exec 'silent !mkdir -p $DOTVIM/.backup'
 endif
 set backupdir=$DOTVIM/.backup/,/tmp//       "   backup files directory
 if empty(glob($DOTVIM . "/.swp"))
-    exec 'silent !mkdir $DOTVIM/.swp'
+    exec 'silent !mkdir -p $DOTVIM/.swp'
 endif
 set directory=$DOTVIM/.directory/,/tmp//    "   undo files directory
 if empty(glob($DOTVIM . "/.undo"))
-    exec 'silent !mkdir $DOTVIM/.undo'
+    exec 'silent !mkdir -p $DOTVIM/.undo'
 endif
 set undodir=$DOTVIM/.undo/,/tmp//           "   undo files directory
 set undofile                        "   enable undofiles
