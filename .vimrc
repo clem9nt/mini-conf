@@ -52,6 +52,9 @@ set undodir=$DOTVIM/.undo/,/tmp//           "   undo files directory
 set undofile                        "   enable undofiles
 set viminfo+='100,<50,s10,h,n$DOTVIM/.viminfo " viminfo location
 
+"                       FUNCTIONS
+command W :execute ':silent w !sudo tee % > /dev/null' | :edit!
+
 "                       MAPPINGS
 nn sf :fin<Space>
 nn se :e *
