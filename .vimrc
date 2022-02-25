@@ -2,7 +2,6 @@
 "   UI
 set nocompatible
 filetype plugin indent on           "   filetype, plugin, indent auto-detect
-set bg=dark
 syntax on
 set bg=dark
 color pablo
