@@ -1,10 +1,9 @@
 "                       OPTIONS
-"   UI
+
 set nocompatible
 filetype plugin indent on           "   filetype, plugin, indent auto-detect
-syntax on
-set bg=dark
-color pablo
+
+"   UI
 hi Visual ctermfg=black ctermfg=grey
 
 "   ERGONOMIC
@@ -15,11 +14,6 @@ set ruler                           "   cursor pos%[y:x] in statusline
 set showcmd                         "   cursor pos%[y:x] in statusline
 set shortmess-=S                    "   displays [x/y] for search pattern occurences
 set wildmenu                        "   displays possible completion matches
-set spelllang=en,fr                 "   spell lang suggestions
-if empty(glob($DOTVIM . "/spell"))
-    exec 'silent !mkdir $DOTVIM/spell'
-endif
-set spellfile=$DOTVIM/.spell/custom.utf-8.add
 
 "   INDENTATION
 set autoindent                      "   auto indent
@@ -36,20 +30,16 @@ set updatetime=100                  "   gitgutter update faster
 set belloff=all                     "   no more ring the bell
 set history=9999                    "   extends cmdline history
 set nomodeline secure               "   disables shell access / modelines
-if empty(glob($DOTVIM . "/.backup"))
-    exec 'silent !mkdir $DOTVIM/.backup'
-endif
-set backupdir=$DOTVIM/.backup//,/tmp//       "   backup files directory
 if empty(glob($DOTVIM . "/.swp"))
     exec 'silent !mkdir $DOTVIM/.swp'
 endif
-set directory=$DOTVIM/.directory//,/tmp//    "   undo files directory
+set directory=$DOTVIM/.swap//,/tmp//    "   undo files directory
 if empty(glob($DOTVIM . "/.undo"))
     exec 'silent !mkdir $DOTVIM/.undo'
 endif
-set undodir=$DOTVIM/.undo/,/tmp//           "   undo files directory
-set undofile                        "   enable undofiles
-set viminfo+='100,<50,s10,h,n$DOTVIM/.viminfo " viminfo location
+set undodir=$DOTVIM/.undo/,/tmp//               "   undo files directory
+set undofile                                    "   enable undofiles
+set viminfo+='100,<50,s10,h,n$DOTVIM/.viminfo   "   viminfo location
 
 "                       FUNCTIONS
 command W :execute ':silent w !sudo tee % > /dev/null' | :edit!
@@ -57,74 +47,42 @@ command W :execute ':silent w !sudo tee % > /dev/null' | :edit!
 "                       MAPPINGS
 nn sf :fin<Space>
 nn se :e *
-nn ss :b#<CR>
+nn sp :b#<CR>
 nn sb :ls<CR>:b<Space>
 nn sd :bn\|bd#<CR>
+no sw  :write<CR>
+no SW  :write !sudo tee %<CR>
+no sq  :quit<CR>
 
-nn xxv :e ~/.vimrc<CR>gi<Esc>
-nn xxz :e ~/.zshrc<CR>gi<Esc>
-nn xxt :e ~/.tmux.conf<CR>gi<Esc>
+nn scv :e ~/.vimrc<CR>gi<Esc>
+nn scz :e ~/.zshrc<CR>gi<Esc>
+nn sct :e ~/.tmux.conf<CR>gi<Esc>
 
-"   CURSORCOLUMN
+"   cursorcolumn
 nn glcc :set cursorcolumn!<CR>
 "   LCD
 nn glcd :cd %:h<CR>
-"   CURSORLINE
+"   cursorline
 nn glcl :set cursorline!<CR>
-"   HLSEARCH
+"   hlsearch
 nn glhl :set hlsearch!<CR>
-"   LIST
+"   list
 nn glli :set list!<CR>
-"   SOURCE VIMRC
+"   source vimrc
 nn glso :silent write\|source $MYVIMRC\|e<CR>zR
-"   SPELL
+"   spell
 nn glsp :set spell!<CR>
-"   VIRTUAL EDIT
+"   virtual edit
 nn glve :if &virtualedit == "" <BAR> set virtualedit=all <BAR>
-"   RESOLVE SYMLINK
+"   resolve symlink
 nn <silent> glsl :exec 'file ' . fnameescape(resolve(expand('%:p')))<CR>:lc %:h<CR>
 
-no ; :
-no : ;
 no <Space>w <C-W>
+nn <Space>wE :resize <C-R>=&lines * 0.66<CR><CR>
+nn <Space>we :vertical resize <C-R>=&columns * 0.66<CR><CR>
 
 no x            <nop>
 no s            <nop>
 no X            <nop>
 nn S            <nop>
 nn Q            <nop>
-
-"   keyboard fix
-ino <Right>q <c-q>
-no <Right>q <c-q>
-ino <Right>w <c-w>
-no <Right>w <c-w>
-ino <Right>e <c-e>
-no <Right>e <c-e>
-ino <Right>r <c-r>
-no <Right>r <c-r>
-ino <Right>t <c-t>
-no <Right>t <c-t>
-ino <Right>a <c-a>
-no <Right>a <c-a>
-ino <Right>s <c-s>
-no <Right>s <c-s>
-ino <Right>d <c-d>
-no <Right>d <c-d>
-ino <Right>f <c-f>
-no <Right>f <c-f>
-ino <Right>g <c-g>
-no <Right>g <c-g>
-ino <Right>z <c-z>
-no <Right>z <c-z>
-ino <Right>x <c-x>
-no <Right>x <c-x>
-ino <Right>c <c-c>
-no <Right>c <c-c>
-ino <Right>v <c-v>
-no <Right>v <c-v>
-ino <Right>b <c-b>
-no <Right>b <c-b>
-
-ino <Right>xf <c-x><c-f>
-no <Right>xf <c-x><c-f>
