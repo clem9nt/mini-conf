@@ -7,7 +7,7 @@ filetype plugin indent on           "   filetype, plugin, indent auto-detect
 hi Visual ctermfg=black ctermfg=grey
 
 "   ERGONOMIC
-set ignorecase smartcase            "   ignore case except if uppercase used
+set smartcase                       "   ignore case except if uppercase used
 set listchars=tab:>\ ,trail:-       "   strings to use for :list command
 set nowrap                          "   disable screen line wrapping
 set ruler                           "   cursor pos%[y:x] in statusline
@@ -30,12 +30,15 @@ set updatetime=100                  "   gitgutter update faster
 set belloff=all                     "   no more ring the bell
 set history=9999                    "   extends cmdline history
 set nomodeline secure               "   disables shell access / modelines
+if !isdirectory($DOTVIM)
+    call mkdir($DOTVIM, "p")
+endif
 if empty(glob($DOTVIM . "/.swp"))
-    exec 'silent !mkdir $DOTVIM/.swp'
+    call mkdir($DOTVIM . "/.swp", "p")
 endif
 set directory=$DOTVIM/.swap//,/tmp//    "   undo files directory
 if empty(glob($DOTVIM . "/.undo"))
-    exec 'silent !mkdir $DOTVIM/.undo'
+    call mkdir($DOTVIM . "/.undo", "p")
 endif
 set undodir=$DOTVIM/.undo/,/tmp//               "   undo files directory
 set undofile                                    "   enable undofiles
@@ -50,9 +53,11 @@ nn se :e *
 nn sp :b#<CR>
 nn sb :ls<CR>:b<Space>
 nn sd :bn\|bd#<CR>
-no sw  :write<CR>
-no SW  :write !sudo tee %<CR>
-no sq  :quit<CR>
+
+nn md :bn\|bd#<CR>
+no mw  :write<CR>
+no mW  :write !sudo tee %<CR>
+no mq  :quit<CR>
 
 nn scv :e ~/.vimrc<CR>gi<Esc>
 nn scz :e ~/.zshrc<CR>gi<Esc>
